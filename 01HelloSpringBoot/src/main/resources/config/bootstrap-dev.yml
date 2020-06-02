@@ -1,0 +1,51 @@
+eureka:
+  instance: # Submitting the credentials using Eureka:
+      metadata-map:
+        user.name: ${security.user.name}
+        user.password: ${security.user.password}
+      # 心跳检测检测与续约时间
+      # 保证服务关闭后注册中心能及时踢出服务
+      lease-renewal-interval-in-seconds: 1
+      lease-expiration-duration-in-seconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://${sendi.eurekaServer.name}:${sendi.eurekaServer.password}@bjsendi:15001/eureka/,http://${sendi.eurekaServer.name}:${sendi.eurekaServer.password}@bjsendi01:15001/eureka/,http://${sendi.eurekaServer.name}:${sendi.eurekaServer.password}@bjsendi02:15001/eureka/
+
+## 默认通用的数据源为HikariDataSource，
+## 需要修改未其他数据源可以添加 custom.datasource.hive.type=com.alibaba.druid.pool.DruidDataSource
+
+##默认数据源
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.1.150:3306/test?useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: ASdfg_123
+
+    url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&useSSL=false
+    username: root
+    password: Mysql456852@.
+    maximumPoolSize: 20
+    connectionTimeout: 30000
+    minimumIdle: 2
+    idleTimeout: 600000
+    connectionTestQuery: select 1
+    maxLifetime: 1800000
+###更多的数据源
+custom:
+  datasource:
+    names: jthxwg_volte,third_service,enum_transfer_db,home
+
+    home:
+      driverClassName: com.mysql.jdbc.Driver
+      jdbcUrl: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&useSSL=false
+      username: root
+      password: Mysql456852@.
+      maximumPoolSize: 20
+      connectionTimeout: 30000
+      minimumIdle: 2
+      idleTimeout: 600000
+      connectionTestQuery: select 1
+      maxLifetime: 1800000

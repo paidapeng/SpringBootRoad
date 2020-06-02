@@ -1,0 +1,14 @@
+
+  profiles:
+    active: dev,config,state
+#    active: proc,config,state
+#    active: cloudproc,config,state
+
+
+
+server:
+  port: 16001
+
+logging:
+  level:
+     com.sendi.user_subscription.jpa.mapper : debug
